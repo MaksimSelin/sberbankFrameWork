@@ -12,8 +12,5 @@ public class MainTest extends Setup {
                 .insertForm()
                 .check();
 
-
-
-        Thread.sleep(5000);
     }
 }
