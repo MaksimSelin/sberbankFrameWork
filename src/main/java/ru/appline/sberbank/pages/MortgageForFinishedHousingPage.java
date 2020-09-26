@@ -1,5 +1,6 @@
 package ru.appline.sberbank.pages;
 
+import io.qameta.allure.*;
 import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -7,6 +8,9 @@ import org.openqa.selenium.support.FindBy;
 import ru.appline.sberbank.entity.Form;
 import ru.appline.sberbank.managers.DriverManager;
 
+/**
+ * Страница готовое жилье
+ */
 public class MortgageForFinishedHousingPage extends BasePage {
 
     @FindBy(xpath = "//h2[text()='\u200BРассчитайте ипотеку']")
@@ -46,12 +50,29 @@ public class MortgageForFinishedHousingPage extends BasePage {
     private WebElement interestRate;
 
 
+    /**
+     * заполняет форму дефолтными значениями
+     * @return
+     * @throws InterruptedException
+     */
+    @Step("Заполнение формы")
     public MortgageForFinishedHousingPage insertForm() throws InterruptedException {
         Form form = Form.getForm();
         insert(form);
         return this;
     }
 
+    /**
+     * заполняет форму кастомными значениями
+     * @param price - цена
+     * @param anInitialFee - первоначальный взнос
+     * @param creditTerm - срок кредита
+     * @param lifeInsurance - страховка жизни (значения true/false)
+     * @param youngFamily - молодая семья (значения true/false)
+     * @return
+     * @throws InterruptedException
+     */
+    @Step("Заполнение формы")
     public MortgageForFinishedHousingPage insertForm(String price, String anInitialFee, String creditTerm, String lifeInsurance, String youngFamily) throws InterruptedException {
         Form form = Form.getForm();
         form.setPrice(price);
@@ -63,6 +84,11 @@ public class MortgageForFinishedHousingPage extends BasePage {
         return this;
     }
 
+    /**
+     * внутренний класс для заполнения формы
+     * @param form - данные для заполнения
+     * @throws InterruptedException
+     */
     private void insert(Form form) throws InterruptedException {
         buttonClose.click();
         scrollToElement(formName);
@@ -76,6 +102,12 @@ public class MortgageForFinishedHousingPage extends BasePage {
 
     }
 
+    /**
+     * внутренний класс для заполнения инпутов формы
+     * @param webElement
+     * @param value
+     * @throws InterruptedException
+     */
     private void clearElementAndInsert(WebElement webElement, String value) throws InterruptedException {
         Thread.sleep(500);
         webElement.sendKeys(Keys.chord(Keys.CONTROL, "a"));
@@ -83,18 +115,28 @@ public class MortgageForFinishedHousingPage extends BasePage {
         webElement.sendKeys(value);
     }
 
+    /**
+     * внутренний класс для установки состояния переключаателей
+     * @param webElement
+     * @param formElement
+     */
     private void checkSwitcher(WebElement webElement, String formElement) {
         scrollToElement(webElement);
         if (!formElement.equals(webElement.getAttribute("aria-checked")))
             webElement.click();
     }
 
+    /**
+     * Проверки
+     * @throws InterruptedException
+     */
+    @Step("Проверки")
     public void check() throws InterruptedException {
         Thread.sleep(1000); //элемент меняется динамически, не придумал как отследить.
         Assert.assertEquals("Проверка поля ежемесячный платеж", "16 017 ₽", monthlyPayment.getText());
         Assert.assertEquals("Проверка поля сумма кредита", "2 122 000 ₽", sumCredit.getText());
         Assert.assertEquals("Проверка поля необходимый доход", "20 618 ₽", income.getText());
-        Assert.assertEquals("Проверка поля процентная ставка", "8,3%", interestRate.getText());
+        Assert.assertEquals("Проверка поля процентная ставка", "11%", interestRate.getText());
     }
 
 

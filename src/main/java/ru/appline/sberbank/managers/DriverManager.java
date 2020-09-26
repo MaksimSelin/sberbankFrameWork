@@ -7,19 +7,19 @@ public class DriverManager {
 
     private static WebDriver driver;
 
-    private DriverManager(){
+    private DriverManager() {
 
     }
 
-    public static WebDriver getDriver(){
-        if (driver == null){
+    public static WebDriver getDriver() {
+        if (driver == null) {
             System.setProperty("webdriver.chrome.driver", PropManager.getPropManager().getProperty("path.chrome.driver"));
             driver = new ChromeDriver();
         }
         return driver;
     }
 
-    public static void quitDriver(){
+    public static void quitDriver() {
         driver.quit();
         driver = null;
     }
