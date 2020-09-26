@@ -7,19 +7,19 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.appline.sberbank.managers.DriverManager;
 
+/**
+ * Супер класс
+ */
 public class BasePage {
 
     WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), 10);
 
-    public BasePage(){
+    public BasePage() {
         PageFactory.initElements(DriverManager.getDriver(), this);
     }
 
-    protected void click(WebElement webElement){
-        webElement.click();
-    }
 
-    protected void scrollToElement(WebElement webElement){
+    protected void scrollToElement(WebElement webElement) {
 //        ((JavascriptExecutor)DriverManager.getDriver()).executeScript("arguments[0].scrollIntoView();", webElement);
         ((JavascriptExecutor) DriverManager.getDriver()).executeScript(
                 "window.scroll(" + (webElement.getLocation().x + 0) + ","
