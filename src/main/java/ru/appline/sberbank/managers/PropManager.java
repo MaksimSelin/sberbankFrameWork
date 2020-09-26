@@ -11,15 +11,16 @@ public class PropManager {
 
     private static PropManager propManager;
 
-    private PropManager() {
+    private PropManager(){
         try {
             properties.load(new FileInputStream(new File("src/main/resources/prop.properties")));
-        } catch (IOException e) {
+        }
+        catch (IOException e){
             e.printStackTrace();
         }
     }
 
-    public static PropManager getPropManager() {
+    public static PropManager getPropManager(){
         if (propManager == null)
             propManager = new PropManager();
         return propManager;
@@ -29,7 +30,7 @@ public class PropManager {
         return properties.getProperty(key);
     }
 
-    public String getProperty(String key, String defaultValue) {
+    public String getProperty (String key, String defaultValue){
         return properties.getProperty(key, defaultValue);
     }
 
