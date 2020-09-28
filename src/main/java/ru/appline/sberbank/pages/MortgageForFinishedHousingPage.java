@@ -141,7 +141,7 @@ public class MortgageForFinishedHousingPage extends BasePage {
      * @throws InterruptedException
      */
     private void clearElementAndInsert(WebElement webElement, String value) throws InterruptedException {
-        Thread.sleep(500);
+        Thread.sleep(2000);
         webElement.sendKeys(Keys.chord(Keys.CONTROL, "a"));
         webElement.sendKeys((Keys.BACK_SPACE));
         webElement.sendKeys(value);
@@ -158,7 +158,7 @@ public class MortgageForFinishedHousingPage extends BasePage {
         if (!formElement.equals(webElement.getAttribute("aria-checked")))
             webElement.click();
         try {
-            Thread.sleep(500);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -170,7 +170,7 @@ public class MortgageForFinishedHousingPage extends BasePage {
      * @throws InterruptedException
      */
     public void check() throws InterruptedException {
-        Thread.sleep(1000); //элемент меняется динамически, не придумал как отследить.
+        Thread.sleep(2000); //элемент меняется динамически, не придумал как отследить.
         Assert.assertEquals("Проверка поля ежемесячный платеж", "16 017 ₽", monthlyPayment.getText());
         Assert.assertEquals("Проверка поля сумма кредита", "2 122 000 ₽", sumCredit.getText());
         Assert.assertEquals("Проверка поля необходимый доход", "20 618 ₽", income.getText());
