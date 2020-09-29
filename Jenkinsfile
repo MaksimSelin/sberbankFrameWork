@@ -1,10 +1,11 @@
+#!groovy
 pipeline {
     agent any
     stages {
         stage('Run Test') {
             steps {
-                withMaven(maven: '') {
-                    bat "mvn clean test -Dcucumber.filter.tags='${TAG}'"
+                withMaven(maven: 'Maven3') {
+                    sh "mvn clean test -Dcucumber.filter.tags='${TAG}'"
                 }
             }
         }
